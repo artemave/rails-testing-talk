@@ -1,0 +1,10 @@
+<p>
+  <div class="comments_header"><%= l comment.created_at %></div>
+  <div><%= comment.body %></div>
+  <div class="comments_actions">
+    <%= link_to 'reply', new_comment_comment_path(comment) %>
+  </div>
+  <div class="comments_child_comments">
+    <%= render comment.comments %>
+  </div>
+</p>
