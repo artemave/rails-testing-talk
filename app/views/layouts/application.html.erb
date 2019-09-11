@@ -4,12 +4,35 @@
     <title>RailsTestingTalk</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="container">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <%= link_to root_url, class: 'navbar-item' do %>
+          <img src="<%= image_path 'logo.png' %>" height="50">
+        <% end %>
+      </div>
+
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <%= active_link_to 'Posts', posts_url, class: 'navbar-item', class_active: 'is-active is-tab', active: :exclusive %>
+          <%= active_link_to 'New Post', new_post_path, class: 'navbar-item', class_active: 'is-active is-tab', active: :exclusive %>
+        </div>
+      </div>
+    </nav>
+
+    <main class="section">
+      <% if notice.present? %>
+        <p id="notice" class="notification is-info"><%= notice %></p>
+      <% end %>
+
+      <%= yield %>
+    </main>
   </body>
 </html>

@@ -1,18 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="content">
+  <h1>
+    <%= @post.title %>
+  </h1>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+  <p>
+    <%= @post.body %>
+  </p>
+  <div class="field is-grouped">
+    <div class="control">
+      <%= link_to 'Back', posts_path, class: 'button is-small' %>
+    </div>
+    <div class="control">
+      <%= link_to 'Edit', edit_post_path(@post), class: 'button is-link is-small' %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Body:</strong>
-  <%= @post.body %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
-
-<h3>Comments</h3>
-<%= link_to 'New Comment', new_post_comment_path(@post) %>
-<%= render @post.comments %>
+<div class="content post-comments-section">
+  <h3>Comments</h3>
+  <%= link_to 'New Comment', new_post_comment_path(@post), class: 'button is-link' %>
+  <%= render @post.comments %>
+</div>

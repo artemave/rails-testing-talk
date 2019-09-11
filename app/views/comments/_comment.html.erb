@@ -1,8 +1,7 @@
 <p>
-  <div class="comments_header"><%= l comment.created_at %></div>
   <div><%= comment.body %></div>
-  <div class="comments_actions">
-    <%= link_to 'reply', new_comment_comment_path(comment) %>
+  <div class="context_actions">
+    <span class="context_actions_details"><%= l comment.created_at %></span> | <%= link_to 'reply', new_comment_comment_path(comment) %>
   </div>
   <div class="comments_child_comments">
     <%= render comment.comments %>

@@ -1,0 +1,33 @@
+$navbar-item-img-max-height: 3rem;
+$navbar-breakpoint: 50px;
+
+@import 'bulma';
+
+.navbar-start .navbar-item {
+  padding-left: 1.2rem ;
+  padding-right: 1.2rem ;
+}
+
+.context_actions_details {
+  color: $grey-light;
+}
+
+.context_actions {
+  font-size: $size-small;
+}
+
+.post_title {
+  font-size: $size-medium;
+}
+
+.post_index_entry {
+  margin-bottom: 15px;
+}
+
+main.section {
+  background-color: $light;
+}
+
+.post-comments-section {
+  margin-top: 42px;
+}

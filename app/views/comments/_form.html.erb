@@ -12,11 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
+    <%= form.label :body, class: 'label' %>
+    <%= form.text_area :body, class: 'textarea' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="field is-grouped">
+    <div class="control">
+      <%= link_to 'Back', :back, class: 'button' %>
+    </div>
+    <div class="actions control">
+      <%= form.submit class: 'button is-primary' %>
+    </div>
   </div>
 <% end %>
