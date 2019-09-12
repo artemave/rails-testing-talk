@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
-  before_action :set_commentable, only: [:new, :create]
+  before_action :set_commentable, only: %i[new create]
 
   # GET /comments/new
   def new
@@ -15,6 +17,9 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html { redirect_to post_path(@comment.root), notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: post_path(@comment.root) }
+      elsif @comment.top_level?
+        @post = @comment.commentable
+        format.html { render 'posts/show' }
       else
         format.html { render :new }
         format.json { render json: @comment.errors, status: :unprocessable_entity }

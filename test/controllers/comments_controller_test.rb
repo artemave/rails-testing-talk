@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class CommentsControllerTest < ActionDispatch::IntegrationTest
@@ -5,12 +7,12 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     @post = posts(:one)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_post_comment_url(@post)
     assert_response :success
   end
 
-  test "should create comment" do
+  test 'should create comment' do
     assert_difference('@post.comments.count') do
       post post_comments_url(@post), params: { comment: { body: 'bananas' } }
     end

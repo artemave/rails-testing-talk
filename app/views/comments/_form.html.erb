@@ -1,4 +1,6 @@
-<%= form_with(model: comment, url: [@commentable, comment], local: true) do |form| %>
+<% embedded = local_assigns.fetch :embedded, false %>
+
+<%= form_with(model: comment, url: [commentable, comment], local: true) do |form| %>
   <% if comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -12,14 +14,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :body, class: 'label' %>
     <%= form.text_area :body, class: 'textarea' %>
   </div>
 
   <div class="field is-grouped">
-    <div class="control">
-      <%= link_to 'Back', :back, class: 'button' %>
-    </div>
+    <% unless embedded %>
+      <div class="control">
+        <%= link_to 'Back', :back, class: 'button' %>
+      </div>
+    <% end %>
     <div class="actions control">
       <%= form.submit class: 'button is-primary' %>
     </div>
