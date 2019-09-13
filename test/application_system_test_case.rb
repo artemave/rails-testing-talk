@@ -7,5 +7,10 @@ Capybara.register_driver :headless_chrome do |app|
 end
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  driven_by :selenium, using: ENV['GUI'].present? ? :chrome : :headless_chrome, screen_size: [1400, 1400]
+  def self.js?
+    ENV['JS'] || ENV['GUI']
+  end
+
+  driver = js? ? :selenium : :rack_test
+  driven_by driver, using: ENV['GUI'].present? ? :chrome : :headless_chrome, screen_size: [1400, 1400]
 end
