@@ -5,7 +5,11 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment ||= Comment.new
+    @comment ||= @commentable.comments.build
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # POST /comments
@@ -16,13 +20,13 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.html { redirect_to post_path(@comment.root), notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: post_path(@comment.root) }
+        format.js
       elsif @comment.top_level?
         @post = @comment.commentable
         format.html { render 'posts/show' }
       else
         format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.js { render :new }
       end
     end
   end

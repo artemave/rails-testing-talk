@@ -1,0 +1,20 @@
+(function() {
+  const $commentContainer = document.querySelector('#comment_<%= @commentable.id %>')
+  const $repliesContainer = $commentContainer.querySelector('.comments_child_comments')
+  const $existingForm = $commentContainer.querySelector('form')
+
+  if ($existingForm) {
+    $existingForm.remove()
+  }
+
+  // Make use of rails standard rendering - so that all html is generated in one place (by rails)
+  const $form = stringToHtml("<%= j render 'form', comment: @comment, commentable: @commentable %>")
+
+  $commentContainer.insertBefore($form, $repliesContainer)
+
+  const $cancelButton = $form.querySelector('.cancel')
+  $cancelButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    $form.remove()
+  })
+})()

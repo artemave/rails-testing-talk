@@ -11,19 +11,21 @@ class CommentsTest < ApplicationSystemTestCase
     visit post_path(@post)
 
     fill_in 'comment_body', with: 'bananas'
-    click_on 'Create Comment'
+    click_on 'Add Comment'
 
-    assert_text 'Comment was successfully created'
     assert_text 'bananas'
   end
 
   test 'replying to a comment' do
     visit post_path(@post)
-    click_on 'reply'
-    fill_in 'comment_body', with: 'apples'
-    click_on 'Create Comment'
 
-    assert_text 'Comment was successfully created'
+    click_on 'reply'
+
+    within ':not(.new_commment_form) form' do
+      fill_in 'comment_body', with: 'apples'
+      click_on 'Add Comment'
+    end
+
     assert_text 'apples'
   end
 end

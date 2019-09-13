@@ -1,23 +1,12 @@
 <div class="content">
-  <h1>
-    <%= @post.title %>
-  </h1>
-
-  <p>
-    <%= @post.body %>
-  </p>
-  <%# <div class="field is-grouped"> %>
-  <%#   <div class="control"> %>
-  <%#     <%= link_to 'Back', posts_path, class: 'button is-small' %1> %>
-  <%#   </div> %>
-  <%#   <div class="control"> %>
-  <%#     <%= link_to 'Edit', edit_post_path(@post), class: 'button is-link is-small' %1> %>
-  <%#   </div> %>
-  <%# </div> %>
+  <h1><%= @post.title %></h1>
+  <p><%= @post.body %></p>
 </div>
 
 <div class="content post-comments-section">
   <h3>Comments</h3>
-  <%= render 'comments/form', comment: @comment, commentable: @post, embedded: true %>
+  <div class="new_commment_form">
+    <%= render 'comments/form', comment: @comment, commentable: @post, hide_back_button: true %>
+  </div>
   <%= render @post.comments.all %>
 </div>

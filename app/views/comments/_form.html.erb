@@ -1,6 +1,6 @@
-<% embedded = local_assigns.fetch :embedded, false %>
+<% hide_back_button = local_assigns.fetch :hide_back_button, false %>
 
-<%= form_with(model: comment, url: [commentable, comment], local: true) do |form| %>
+<%= form_with(model: comment, url: [commentable, comment]) do |form| %>
   <% if comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -18,13 +18,13 @@
   </div>
 
   <div class="field is-grouped">
-    <% unless embedded %>
+    <% unless hide_back_button %>
       <div class="control">
-        <%= link_to 'Back', :back, class: 'button' %>
+        <%= link_to 'Cancel', :back, class: 'button cancel' %>
       </div>
     <% end %>
     <div class="actions control">
-      <%= form.submit class: 'button is-primary' %>
+      <%= form.submit 'Add Comment', class: 'button is-primary' %>
     </div>
   </div>
 <% end %>

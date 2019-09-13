@@ -14,6 +14,6 @@ class Comment < ApplicationRecord
   end
 
   def top_level?
-    commentable == root
+    commentable.is_a?(Post)
   end
 end

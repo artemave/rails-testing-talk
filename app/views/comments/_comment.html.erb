@@ -1,9 +1,10 @@
-<p>
+<div class="comment_entry" id="comment_<%= comment.id %>">
   <div><%= comment.body %></div>
   <div class="context_actions">
-    <span class="context_actions_details"><%= l comment.created_at %></span> | <%= link_to 'reply', new_comment_comment_path(comment) %>
+    <span class="context_actions_details"><%= l comment.created_at %></span> |
+    <%= link_to 'reply', new_comment_comment_path(comment), remote: true, class: 'reply_link' %>
   </div>
   <div class="comments_child_comments">
     <%= render comment.comments %>
   </div>
-</p>
+</div>
