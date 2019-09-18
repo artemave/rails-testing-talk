@@ -1,24 +1,7 @@
-# README
+# Demo project for "Full stack testing in Rails" talk
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+https://www.meetup.com/GenevaWeb/events/264158722
 
-Things you may want to cover:
+These commits show how Rails default system tests setup can be improved by running tests in Headless Chrome, rack-test and then by allowing your SPA to fallback to non-js version so that tests can be run rack-test.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![image](https://user-images.githubusercontent.com/23721/65127201-84392d80-d9f7-11e9-818e-1e4ba508583a.png)
