@@ -1,8 +1,9 @@
-<% hide_back_button = local_assigns.fetch :hide_back_button, false %>
+<% stimulus_controller = comment.top_level? ? 'new-comment' : 'reply' %>
+<% stimulus_form_action = "ajax:success->#{stimulus_controller}#onCommentSuccess ajax:error->#{stimulus_controller}#onCommentError".html_safe %>
 
-<%= form_with(model: comment, url: [commentable, comment]) do |form| %>
+<%= form_with(model: comment, url: [commentable, comment], html: { data: { type: 'text', action: stimulus_form_action } }) do |form| %>
   <% if comment.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" data-target="<%= "#{stimulus_controller}.errors" %>">
       <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
       <ul>
@@ -18,9 +19,9 @@
   </div>
 
   <div class="field is-grouped">
-    <% unless hide_back_button %>
+    <% if stimulus_controller == 'reply' %>
       <div class="control">
-        <%= link_to 'Cancel', :back, class: 'button cancel' %>
+        <%= link_to 'Cancel', :back, class: 'button', data: { action: 'reply#removeForm' } %>
       </div>
     <% end %>
     <div class="actions control">

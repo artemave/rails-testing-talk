@@ -5,8 +5,8 @@
 
 <div class="content post-comments-section">
   <h3>Comments</h3>
-  <div class="new_commment_form">
-    <%= render 'comments/form', comment: @comment, commentable: @post, hide_back_button: true %>
+  <div class="content" data-controller="new-comment">
+    <%= render 'comments/form', comment: @comment, commentable: @post %>
   </div>
   <%= render @post.comments.all %>
 </div>

@@ -6,27 +6,26 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment ||= @commentable.comments.build
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   # POST /comments
-  # POST /comments.json
   def create
     @comment = @commentable.comments.build(comment_params)
 
     respond_to do |format|
       if @comment.save
         format.html { redirect_to post_path(@comment.root), notice: 'Comment was successfully created.' }
-        format.js
-      elsif @comment.top_level?
-        @post = @comment.commentable
-        format.html { render 'posts/show' }
+        format.text { render partial: 'comments/comment.html.erb', object: @comment }
       else
-        format.html { render :new }
-        format.js { render :new }
+        format.html do
+          if @comment.top_level?
+            @post = @comment.commentable
+            render 'posts/show'
+          else
+            render :new
+          end
+        end
+        format.text { render :new, status: :bad_request }
       end
     end
   end

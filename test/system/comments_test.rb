@@ -21,11 +21,30 @@ class CommentsTest < ApplicationSystemTestCase
 
     click_on 'reply'
 
-    within ':not(.new_commment_form) form' do
+    within ':not([data-controller=new-comment]) form' do
       fill_in 'comment_body', with: 'apples'
       click_on 'Add Comment'
     end
 
     assert_text 'apples'
+  end
+
+  test 'submitting invalid post comment' do
+    visit post_path(@post)
+    click_on 'Add Comment'
+
+    assert_text "Body can't be blank"
+  end
+
+  test 'submitting invalid reply' do
+    visit post_path(@post)
+
+    click_on 'reply'
+
+    within ':not([data-controller=new-comment]) form' do
+      click_on 'Add Comment'
+    end
+
+    assert_text "Body can't be blank"
   end
 end

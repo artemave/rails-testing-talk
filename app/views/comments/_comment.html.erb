@@ -1,10 +1,10 @@
-<div class="comment_entry" id="comment_<%= comment.id %>">
+<div class="comment_entry" data-controller="reply">
   <div><%= comment.body %></div>
-  <div class="context_actions">
+  <div class="context_actions" data-target="reply.actions">
     <span class="context_actions_details"><%= l comment.created_at %></span> |
-    <%= link_to 'reply', new_comment_comment_path(comment), remote: true, class: 'reply_link' %>
+    <%= link_to 'reply', new_comment_comment_path(comment), remote: true, data: { type: 'text', action: "ajax:success->reply#onNewFormSuccess".html_safe }, class: 'reply_link' %>
   </div>
-  <div class="comments_child_comments">
+  <div class="comment_replies_container" data-target="reply.replies">
     <%= render comment.comments %>
   </div>
 </div>
