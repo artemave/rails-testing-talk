@@ -11,6 +11,8 @@ class CommentsController < ApplicationController
   # POST /comments
   def create
     @comment = @commentable.comments.build(comment_params)
+    r = HttpClient.post posts_url, { post: { title: 'balls', body: 'buster' } }, { accept: :json }
+    puts response: r.headers
 
     respond_to do |format|
       if @comment.save
