@@ -23,6 +23,13 @@ class RackTestHttpClient
   end
 end
 
+Apartment::Tenant.drop 'tenant1' rescue nil
+Apartment::Tenant.create 'tenant1'
+Apartment::Tenant.drop 'tenant2' rescue nil
+Apartment::Tenant.create 'tenant2'
+
+Apartment::Tenant.switch! 'tenant1'
+
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def self.js?
     ENV['JS'] || ENV['GUI']
